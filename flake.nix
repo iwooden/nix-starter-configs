@@ -66,7 +66,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main nixos configuration file <
-          ./nixos/configuration.nix
+          ./nixos/wsl.nix
           # Needed for WSL
           nixos-wsl.nixosModules.wsl
         ];
