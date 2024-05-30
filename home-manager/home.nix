@@ -65,7 +65,7 @@
     unstable.nh
 
     # editors
-    (if isDarwin emacs-mac else emacs29)
+    (if isDarwin then emacs-mac else emacs29)
 
     # emacs stuff
     aspell
