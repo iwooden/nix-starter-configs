@@ -8,6 +8,9 @@
   pkgs,
   ...
 }: {
+  # switch stuff based on darwin/linux
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
+
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -45,19 +48,51 @@
     };
   };
 
-  # TODO: Set your username
   home = {
     username = "iwooden";
     homeDirectory = "/home/iwooden";
   };
 
   # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  home.packages = with pkgs; [
+    # baseline tools
+    git
+    ripgrep
+    coreutils
+    fd
+    wget
+    curl
+    unstable.nh
 
-  # Enable home-manager and git
+    # editors
+    (if isDarwin emacs-mac else emacs29)
+
+    # emacs stuff
+    aspell
+    pandoc
+    editorconfig-core-c
+    sqlite
+
+    # compiler stuff
+    cmake
+    gnumake
+
+    # nix lang stuff
+    nixfmt
+  ];
+
+  # Enable stuff that doesn't needs extra config
   programs.home-manager.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "Isaac Wooden";
+    userEmail = "iwooden@protonmail.com";
+  }
+  programs.firefox.enable = true;
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
+  }
 
   # Nicely reload system units when changing configs
   # Disabling cause this prooobably breaks on WSL
