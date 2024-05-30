@@ -87,12 +87,12 @@
     enable = true;
     userName = "Isaac Wooden";
     userEmail = "iwooden@protonmail.com";
-  }
+  };
   programs.firefox.enable = true;
   programs.vim = {
     enable = true;
     defaultEditor = true;
-  }
+  };
 
   # Nicely reload system units when changing configs
   # Disabling cause this prooobably breaks on WSL
