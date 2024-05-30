@@ -9,7 +9,7 @@
   ...
 }: {
   # switch stuff based on darwin/linux
-  inherit (pkgs.stdenv.hostPlatform) isDarwin;
+  inherit (pkgs.stdenv) isDarwin;
 
   # You can import other home-manager modules here
   imports = [
@@ -65,7 +65,7 @@
     unstable.nh
 
     # editors
-    if isDarwin then emacs-mac else emacs29
+    (if isDarwin then emacs-mac else emacs29)
 
     # emacs stuff
     aspell
