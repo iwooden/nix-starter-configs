@@ -26,7 +26,7 @@
     nixpkgs,
     home-manager,
     nixos-wsl,
-    nix-darwin
+    nix-darwin,
     ...
   } @ inputs: let
     inherit (self) outputs;
