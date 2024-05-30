@@ -76,6 +76,11 @@
 
     # nix lang stuff
     nixfmt
+
+    # fonts
+    jetbrains-mono
+    etBook
+    meslo-lgs-nf
   ];
 
   # Enable programs that need extra config
@@ -96,7 +101,17 @@
       enableBashIntegration = true;
       nix-direnv.enable = true;
     };
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+    };
   };
+
+  # Fonts
+  fonts.fontconfig.enable = true;
 
   # Services
   services = {
