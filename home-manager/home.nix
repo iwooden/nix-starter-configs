@@ -81,17 +81,29 @@
     nixfmt
   ];
 
-  # Enable stuff that doesn't needs extra config
-  programs.home-manager.enable = true;
-  programs.git = {
-    enable = true;
-    userName = "Isaac Wooden";
-    userEmail = "iwooden@protonmail.com";
+  # Enable programs that need extra config
+  programs = {
+    home-manager.enable = true;
+    git = {
+      enable = true;
+      userName = "Isaac Wooden";
+      userEmail = "iwooden@protonmail.com";
+    };
+    firefox.enable = true;
+    vim = {
+      enable = true;
+      defaultEditor = true;
+    };
+    direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      nix-direnv.enable = true;
+    }
   };
-  programs.firefox.enable = true;
-  programs.vim = {
-    enable = true;
-    defaultEditor = true;
+
+  # Services
+  services = {
+    syncthing.enable = true;
   };
 
   # Nicely reload system units when changing configs
