@@ -8,9 +8,6 @@
   pkgs,
   ...
 }: {
-  # switch stuff based on darwin/linux
-  inherit (pkgs.stdenv) isDarwin;
-
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -65,7 +62,7 @@
     unstable.nh
 
     # editors
-    (if isDarwin then emacs-mac else emacs29)
+    (if pkgs.stdenv.isDarwin then emacs-mac else emacs29)
 
     # emacs stuff
     aspell
