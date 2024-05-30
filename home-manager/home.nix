@@ -81,6 +81,9 @@
     jetbrains-mono
     etBook
     meslo-lgs-nf
+
+    # zsh
+    zsh-powerlevel10k
   ];
 
   # Enable programs that need extra config
