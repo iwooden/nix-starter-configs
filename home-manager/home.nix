@@ -115,7 +115,7 @@
         enable = true;
         plugins = [  ];
         theme = "jispwoso";
-      }
+      };
       # plugins = [
       #   {
       #     name = "zsh-powerlevel10k";
