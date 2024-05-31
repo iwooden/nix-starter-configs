@@ -51,6 +51,8 @@
   };
 
   # Add stuff for your user as you see fit:
+  # NOTE: Don't add GUI packages here since it'll conflict with nix-darwin
+  # (homebrew casks)
   home.packages = with pkgs; [
     # baseline tools
     git
@@ -61,8 +63,8 @@
     curl
     unstable.nh
 
-    # editors
-    (if pkgs.stdenv.isDarwin then emacs-mac else emacs29)
+    # editors (not emacs)
+    # (if pkgs.stdenv.isDarwin then emacs-mac else emacs29)
 
     # emacs stuff
     aspell
@@ -83,10 +85,12 @@
     meslo-lgs-nf
 
     # zsh
-    zsh-powerlevel10k
+    # zsh-powerlevel10k
   ];
 
   # Enable programs that need extra config
+  # NOTE: Don't add GUI packages here since it'll conflict with nix-darwin
+  # (homebrew casks)
   programs = {
     home-manager.enable = true;
     git = {
@@ -94,36 +98,36 @@
       userName = "Isaac Wooden";
       userEmail = "iwooden@protonmail.com";
     };
-    firefox.enable = true;
+    # firefox.enable = true;
     vim = {
       enable = true;
       defaultEditor = true;
     };
     direnv = {
       enable = true;
-      enableBashIntegration = true;
+      enableZshIntegration = true;
       nix-direnv.enable = true;
     };
     zsh = {
       enable = true;
       syntaxHighlighting.enable = true;
-      plugins = [
-        {
-          name = "zsh-powerlevel10k";
-          src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/";
-          file = "powerlevel10k.zsh-theme";
-        }
-      ];
+      oh-my-zsh = {
+        enable = true;
+        plugins = [  ];
+        theme = "jispwoso";
+      }
+      # plugins = [
+      #   {
+      #     name = "zsh-powerlevel10k";
+      #     src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/";
+      #     file = "powerlevel10k.zsh-theme";
+      #   }
+      # ];
     };
   };
 
   # Fonts
   fonts.fontconfig.enable = true;
-
-  # Services
-  services = {
-    syncthing.enable = true;
-  };
 
   # Nicely reload system units when changing configs
   # Disabling cause this prooobably breaks on WSL
