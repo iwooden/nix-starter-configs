@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [ ./default-stuff.nix ];
   nixpkgs.hostPlatform = "x86_64-linux";
   networking.hostName = "nix-wsl";
