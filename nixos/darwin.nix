@@ -16,6 +16,7 @@
       "signal"
       "whatsapp"
       "zoom"
+      "syncthing"
     ];
 
     # Mac AppStore stuff
