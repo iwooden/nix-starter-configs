@@ -3,14 +3,14 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # WSL
@@ -21,7 +21,15 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, nix-darwin, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nixos-wsl,
+      nix-darwin,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       # Supported systems for your flake packages, shell, etc.
@@ -35,15 +43,14 @@
       # This is a function that generates an attribute by calling a function you
       # pass to it, with each system as an argument
       forAllSystems = nixpkgs.lib.genAttrs systems;
-    in {
+    in
+    {
       # Your custom packages
       # Accessible through 'nix build', 'nix shell', etc
-      packages =
-        forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
       # Formatter for your nix files, available through 'nix fmt'
       # Other options beside 'alejandra' include 'nixpkgs-fmt'
-      formatter =
-        forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
       # Your custom packages and modifications, exported as overlays
       overlays = import ./overlays { inherit inputs; };
@@ -59,7 +66,9 @@
       nixosConfigurations = {
         # Hostname here
         nix-wsl = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+          };
           modules = [
             # > Our main nixos configuration file <
             ./nixos/wsl.nix
@@ -72,7 +81,9 @@
       # TODO: Incomplete!
       darwinConfigurations = {
         mac-studio = nix-darwin.lib.darwinSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+          };
           modules = [ ./nixos/darwin.nix ];
         };
       };
@@ -82,9 +93,10 @@
       homeConfigurations = {
         # replace with your username@hostname
         "iwooden@nix-wsl" = home-manager.lib.homeManagerConfiguration {
-          pkgs =
-            nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs; };
+          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
           modules = [
             # > Our main home-manager configuration file <
             ./home-manager/wsl-home.nix
@@ -92,9 +104,10 @@
         };
 
         "iwooden@mac-studio" = home-manager.lib.homeManagerConfiguration {
-          pkgs =
-            nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs; };
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
           modules = [
             # > Our main home-manager configuration file <
             ./home-manager/darwin-home.nix

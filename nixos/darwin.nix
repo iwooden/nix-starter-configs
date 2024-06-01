@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [ ./default-stuff.nix ];
   nixpkgs.hostPlatform = "aarch64-darwin";
   networking.hostName = "mac-studio";
@@ -7,6 +8,8 @@
 
   homebrew = {
     enable = true;
+
+    # Careful - this will delete everything not listed below
     onActivation.cleanup = "uninstall";
 
     casks = [
@@ -19,6 +22,7 @@
       "whatsapp"
       "zoom"
       "syncthing"
+      "steermouse"
     ];
 
     # Mac AppStore stuff
@@ -39,7 +43,9 @@
       ShowPathbar = true;
       FXEnableExtensionChangeWarning = false;
     };
-    NSGlobalDomain = { AppleInterfaceStyle = "Dark"; };
+    NSGlobalDomain = {
+      AppleInterfaceStyle = "Dark";
+    };
   };
 
   # Used for backwards compatibility, please read the changelog before changing.

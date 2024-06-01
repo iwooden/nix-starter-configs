@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [ ./home.nix ];
 
   home = {
@@ -9,10 +10,8 @@
   programs = {
     emacs = {
       enable = true;
-      package = pkgs.emacs29-macport;
-      extraPackages = epkgs: with epkgs; [
-        vterm
-      ];
+      package = pkgs.emacs-macport;
+      extraPackages = epkgs: with epkgs; [ vterm ];
     };
   };
 }

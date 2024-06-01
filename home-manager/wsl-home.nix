@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [ ./home.nix ];
 
   home = {
@@ -10,10 +11,13 @@
     firefox.enable = true;
     emacs = {
       enable = true;
-      package = pkgs.emacs29;
+      package = pkgs.emacs;
+      extraPackages = epkgs: with epkgs; [ vterm ];
     };
   };
 
   # Services
-  services = { syncthing.enable = true; };
+  services = {
+    syncthing.enable = true;
+  };
 }

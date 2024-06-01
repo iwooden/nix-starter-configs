@@ -1,6 +1,14 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ inputs, outputs, lib, config, pkgs, ... }: {
+{
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -49,10 +57,16 @@
     fd
     wget
     curl
-    unstable.nh
+    nh
 
     # emacs stuff
-    (aspellWithDicts (ps: with ps; [ en en-computers en-science ]))
+    (aspellWithDicts (
+      ps: with ps; [
+        en
+        en-computers
+        en-science
+      ]
+    ))
     pandoc
     editorconfig-core-c
     sqlite
@@ -63,7 +77,7 @@
     gnumake
 
     # nix lang stuff
-    nixfmt
+    nixfmt-rfc-style
     nil
 
     # fonts
