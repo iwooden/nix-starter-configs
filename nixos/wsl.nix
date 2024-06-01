@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  inputs,
+  outputs,
+  pkgs,
+  ...
+}:
 {
   imports = [ ./default-stuff.nix ];
   nixpkgs.hostPlatform = "x86_64-linux";
@@ -28,6 +33,16 @@
       ];
       shell = pkgs.zsh;
     };
+  };
+
+  # home-manager as part of OS config
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPkgs = true;
+    extraSpecialArgs = {
+      inherit inputs outputs;
+    };
+    users.iwooden = import ../home-manager/wsl-home.nix;
   };
 
   # don't change this

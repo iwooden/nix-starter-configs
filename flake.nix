@@ -92,17 +92,6 @@
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
         # replace with your username@hostname
-        "iwooden@nix-wsl" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
-          modules = [
-            # > Our main home-manager configuration file <
-            ./home-manager/wsl-home.nix
-          ];
-        };
-
         "iwooden@mac-studio" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = {
