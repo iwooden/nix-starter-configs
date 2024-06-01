@@ -10,6 +10,9 @@
     emacs = {
       enable = true;
       package = pkgs.emacs29-macport;
+      extraPackages = epkgs: with epkgs; [
+        vterm
+      ];
     };
   };
 }

@@ -56,6 +56,7 @@
     pandoc
     editorconfig-core-c
     sqlite
+    fontconfig
 
     # compiler stuff
     cmake
@@ -68,7 +69,7 @@
     # fonts
     jetbrains-mono
     etBook
-    meslo-lgs-nf
+    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
 
     # zsh
     # zsh-powerlevel10k
