@@ -1,13 +1,6 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
+{ inputs, outputs, lib, config, pkgs, ... }: {
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -45,11 +38,6 @@
     };
   };
 
-  home = {
-    username = "iwooden";
-    homeDirectory = "/home/iwooden";
-  };
-
   # Add stuff for your user as you see fit:
   # NOTE: Don't add GUI packages here since it'll conflict with nix-darwin
   # (homebrew casks)
@@ -63,11 +51,8 @@
     curl
     unstable.nh
 
-    # editors (not emacs)
-    # (if pkgs.stdenv.isDarwin then emacs-mac else emacs29)
-
     # emacs stuff
-    aspell
+    (aspellWithDicts (ps: with ps; [ en en-computers en-science ]))
     pandoc
     editorconfig-core-c
     sqlite
@@ -78,6 +63,7 @@
 
     # nix lang stuff
     nixfmt
+    nil
 
     # fonts
     jetbrains-mono
@@ -98,7 +84,6 @@
       userName = "Isaac Wooden";
       userEmail = "iwooden@protonmail.com";
     };
-    # firefox.enable = true;
     vim = {
       enable = true;
       defaultEditor = true;
@@ -113,7 +98,7 @@
       syntaxHighlighting.enable = true;
       oh-my-zsh = {
         enable = true;
-        plugins = [  ];
+        plugins = [ ];
         theme = "jispwoso";
       };
       # plugins = [

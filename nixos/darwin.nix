@@ -7,8 +7,10 @@
 
   homebrew = {
     enable = true;
+    onActivation.cleanup = "uninstall";
 
     casks = [
+      "1password"
       "google-chrome"
       "wezterm"
       "spotify"
@@ -37,9 +39,7 @@
       ShowPathbar = true;
       FXEnableExtensionChangeWarning = false;
     };
-    NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
-    };
+    NSGlobalDomain = { AppleInterfaceStyle = "Dark"; };
   };
 
   # Used for backwards compatibility, please read the changelog before changing.

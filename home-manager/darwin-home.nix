@@ -3,17 +3,13 @@
 
   home = {
     username = "iwooden";
-    homeDirectory = "/home/iwooden";
+    homeDirectory = "/Users/iwooden";
   };
 
   programs = {
-    firefox.enable = true;
     emacs = {
       enable = true;
-      package = pkgs.emacs29;
+      package = pkgs.emacs29-macport;
     };
   };
-
-  # Services
-  services = { syncthing.enable = true; };
 }
