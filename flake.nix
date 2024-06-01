@@ -78,21 +78,37 @@
         };
       };
 
-      # TODO: Incomplete!
       darwinConfigurations = {
         mac-studio = nix-darwin.lib.darwinSystem {
           specialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./nixos/darwin.nix ];
+          modules = [ ./nixos/mac-studio.nix ];
+        };
+        macbook = nix-darwin.lib.darwinSystem {
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./nixos/macbook.nix ];
         };
       };
 
       # Standalone home-manager configuration entrypoint
+      # Really just used for macos
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
         # replace with your username@hostname
         "iwooden@mac-studio" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [
+            # > Our main home-manager configuration file <
+            ./home-manager/darwin-home.nix
+          ];
+        };
+        "iwooden@macbook" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = {
             inherit inputs outputs;

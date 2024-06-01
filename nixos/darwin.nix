@@ -2,7 +2,6 @@
 {
   imports = [ ./default-stuff.nix ];
   nixpkgs.hostPlatform = "aarch64-darwin";
-  networking.hostName = "mac-studio";
 
   services.nix-daemon.enable = true;
 
@@ -22,7 +21,6 @@
       "whatsapp"
       "zoom"
       "syncthing"
-      "steermouse"
     ];
 
     # Mac AppStore stuff
