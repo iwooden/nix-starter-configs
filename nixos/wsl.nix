@@ -5,7 +5,10 @@
   ...
 }:
 {
-  imports = [ ./default-stuff.nix ];
+  imports = [
+    ./default-stuff.nix
+    inputs.home-manager.nixosModules.home-manager
+  ];
   nixpkgs.hostPlatform = "x86_64-linux";
   networking.hostName = "nix-wsl";
 
