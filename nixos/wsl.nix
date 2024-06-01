@@ -41,7 +41,7 @@
   # home-manager as part of OS config
   home-manager = {
     useGlobalPkgs = true;
-    useUserPkgs = true;
+    useUserPackages = true;
     extraSpecialArgs = {
       inherit inputs outputs;
     };
